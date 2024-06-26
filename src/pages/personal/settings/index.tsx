@@ -1,14 +1,13 @@
 import React from 'react';
 import useLocale from '@/utils/useLocale';
-import locale from '@/pages/dashboard/workplace/locale';
 import Security from '@/pages/personal/settings/security';
 
 function Settings() {
-  const t = useLocale(locale);
+  const t = useLocale();
 
   return (
     <div>
-      <Security />
+      <Security/>
     </div>
   );
 }
