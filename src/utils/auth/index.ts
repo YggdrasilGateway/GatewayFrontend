@@ -94,6 +94,7 @@ function refreshToken() {
   if (exp - now <= 1000 * 60 && exp > now) {
     axios.post('/api/user/refresh-jwt', {}).then((e) => {
       if (e.status == 200) {
+        console.log("Refreshed token with ", e.data)
         setToken(e.data.data.token);
         setTokenExpireTime(e.data.data.validToTimestamp);
       }

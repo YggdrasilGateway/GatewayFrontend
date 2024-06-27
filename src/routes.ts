@@ -33,8 +33,14 @@ export const routes: IRoute[] = [
     ],
   },
   {
-    name: 'Example',
-    key: 'example',
+    name: 'menu.yggdrasil',
+    key: 'yggdrasil',
+    children: [
+      {
+        name: 'menu.yggdrasil.services',
+        key: 'yggdrasil/services',
+      }
+    ],
   },
 ];
 

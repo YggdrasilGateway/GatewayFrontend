@@ -1,23 +1,18 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
-import { Breadcrumb, Layout, Menu, Spin } from '@arco-design/web-react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
+import {Redirect, Route, Switch, useHistory} from 'react-router-dom';
+import {Breadcrumb, Layout, Menu, Spin} from '@arco-design/web-react';
 import cs from 'classnames';
-import {
-  IconDashboard,
-  IconMenuFold,
-  IconMenuUnfold,
-  IconUser,
-} from '@arco-design/web-react/icon';
-import { useSelector } from 'react-redux';
+import {IconCloud, IconDashboard, IconMenuFold, IconMenuUnfold, IconUser,} from '@arco-design/web-react/icon';
+import {useSelector} from 'react-redux';
 import qs from 'query-string';
 import NProgress from 'nprogress';
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';
-import useRoute, { IRoute } from '@/routes';
+import useRoute, {IRoute} from '@/routes';
 import useLocale from './utils/useLocale';
 import getUrlParams from './utils/getUrlParams';
 import lazyload from './utils/lazyload';
-import { GlobalState } from './store';
+import {GlobalState} from './store';
 import styles from './style/layout.module.less';
 
 const MenuItem = Menu.Item;
@@ -29,13 +24,13 @@ const Content = Layout.Content;
 function getIconFromKey(key) {
   switch (key) {
   case 'dashboard':
-    return <IconDashboard className={styles.icon} />;
-  case 'example':
-    return <IconUser className={styles.icon} />;
+    return <IconDashboard className={styles.icon}/>;
+  case 'yggdrasil':
+    return <IconCloud className={styles.icon}/>;
   case 'personal':
-    return <IconUser className={styles.icon} />;
+    return <IconUser className={styles.icon}/>;
   default:
-    return <div className={styles['icon-empty']} />;
+    return <div className={styles['icon-empty']}/>;
   }
 }
 
@@ -71,7 +66,7 @@ function PageLayout() {
   const pathname = history.location.pathname;
   const currentComponent = qs.parseUrl(pathname).url.slice(1);
   const locale = useLocale();
-  const { settings, userLoading, userInfo } = useSelector(
+  const {settings, userLoading, userInfo} = useSelector(
     (state: GlobalState) => state
   );
   const [routes, defaultRoute] = useRoute(userInfo?.permissions);
@@ -103,7 +98,7 @@ function PageLayout() {
     routeMap.current.clear();
     return function travel(_routes: IRoute[], level, parentNode = []) {
       return _routes.map((route) => {
-        const { breadcrumb = true, ignore } = route;
+        const {breadcrumb = true, ignore} = route;
         const iconDom = getIconFromKey(route.key);
         const titleDom = (
           <>
@@ -117,7 +112,7 @@ function PageLayout() {
         );
 
         const visibleChildren = (route.children || []).filter((child) => {
-          const { ignore, breadcrumb = true } = child;
+          const {ignore, breadcrumb = true} = child;
           if (ignore || route.ignore) {
             routeMap.current.set(
               `/${child.key}`,
@@ -132,14 +127,14 @@ function PageLayout() {
           return '';
         }
         if (visibleChildren.length) {
-          menuMap.current.set(route.key, { subMenu: true });
+          menuMap.current.set(route.key, {subMenu: true});
           return (
             <SubMenu key={route.key} title={titleDom}>
               {travel(visibleChildren, level + 1, [...parentNode, route.name])}
             </SubMenu>
           );
         }
-        menuMap.current.set(route.key, { menuItem: true });
+        menuMap.current.set(route.key, {menuItem: true});
         return <MenuItem key={route.key}>{titleDom}</MenuItem>;
       });
     };
@@ -160,9 +155,9 @@ function PageLayout() {
     setCollapsed((collapsed) => !collapsed);
   }
 
-  const paddingLeft = showMenu ? { paddingLeft: menuWidth } : {};
-  const paddingTop = showNavbar ? { paddingTop: navbarHeight } : {};
-  const paddingStyle = { ...paddingLeft, ...paddingTop };
+  const paddingLeft = showMenu ? {paddingLeft: menuWidth} : {};
+  const paddingTop = showNavbar ? {paddingTop: navbarHeight} : {};
+  const paddingStyle = {...paddingLeft, ...paddingTop};
 
   function updateMenuStatus() {
     const pathKeys = pathname.split('/');
@@ -196,10 +191,10 @@ function PageLayout() {
           [styles['layout-navbar-hidden']]: !showNavbar,
         })}
       >
-        <Navbar show={showNavbar} />
+        <Navbar show={showNavbar}/>
       </div>
       {userLoading ? (
-        <Spin className={styles['spin']} />
+        <Spin className={styles['spin']}/>
       ) : (
         <Layout>
           {showMenu && (
@@ -225,7 +220,7 @@ function PageLayout() {
                 </Menu>
               </div>
               <div className={styles['collapse-btn']} onClick={toggleCollapse}>
-                {collapsed ? <IconMenuUnfold /> : <IconMenuFold />}
+                {collapsed ? <IconMenuUnfold/> : <IconMenuFold/>}
               </div>
             </Sider>
           )}
@@ -254,7 +249,7 @@ function PageLayout() {
                     );
                   })}
                   <Route exact path="/">
-                    <Redirect to={`/${defaultRoute}`} />
+                    <Redirect to={`/${defaultRoute}`}/>
                   </Route>
                   <Route
                     path="*"
@@ -263,7 +258,7 @@ function PageLayout() {
                 </Switch>
               </Content>
             </div>
-            {showFooter && <Footer />}
+            {showFooter && <Footer/>}
           </Layout>
         </Layout>
       )}
