@@ -44,6 +44,10 @@ export const routes: IRoute[] = [
         name: 'menu.yggdrasil.players',
         key: 'yggdrasil/players',
       },
+      {
+        name: 'menu.yggdrasil.settings',
+        key: 'yggdrasil/settings',
+      },
     ],
   },
 ];

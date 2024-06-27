@@ -138,7 +138,7 @@ function PlayerEditor({data, reloadServices}) {
           <Form.Item
             label={t('yggdrasil.player.always-permit')}
             field="alwaysPermit"
-            tooltip={t('yggdrasil.prohibit-mode.tooltip')}
+            tooltip={t('yggdrasil.settings.prohibit-mode.tooltip')}
             triggerPropName={'checked'}
           ><Switch/></Form.Item>
         </Form>
