@@ -1,5 +1,5 @@
-import auth, { AuthParams } from '@/utils/authentication';
-import { useEffect, useMemo, useState } from 'react';
+import auth, {AuthParams} from '@/utils/authentication';
+import {useEffect, useMemo, useState} from 'react';
 
 export type IRoute = AuthParams & {
   name: string;
@@ -39,7 +39,11 @@ export const routes: IRoute[] = [
       {
         name: 'menu.yggdrasil.services',
         key: 'yggdrasil/services',
-      }
+      },
+      {
+        name: 'menu.yggdrasil.players',
+        key: 'yggdrasil/players',
+      },
     ],
   },
 ];
@@ -74,23 +78,23 @@ const useRoute = (userPermission): [IRoute[], string] => {
       return [];
     }
     for (const route of routes) {
-      const { requiredPermissions, oneOfPerm } = route;
+      const {requiredPermissions, oneOfPerm} = route;
       let visible = true;
       if (requiredPermissions) {
-        visible = auth({ requiredPermissions, oneOfPerm }, userPermission);
+        visible = auth({requiredPermissions, oneOfPerm}, userPermission);
       }
 
       if (!visible) {
         continue;
       }
       if (route.children && route.children.length) {
-        const newRoute = { ...route, children: [] };
+        const newRoute = {...route, children: []};
         filterRoute(route.children, newRoute.children);
         if (newRoute.children.length) {
           arr.push(newRoute);
         }
       } else {
-        arr.push({ ...route });
+        arr.push({...route});
       }
     }
 
