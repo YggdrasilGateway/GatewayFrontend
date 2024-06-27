@@ -119,7 +119,7 @@ function ServiceEditor({data, reloadServices}) {
             field='urlPath'
             rules={[{required: true}]}
           >
-            <Input placeholder="Type your old password" type="text"/>
+            <Input type="text"/>
           </Form.Item>
           <Form.Item
             label={t('yggdrasil.service.is-enabled')}
