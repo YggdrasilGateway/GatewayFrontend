@@ -33,7 +33,6 @@ export default function LoginForm() {
   async function login(params) {
     try {
       const hashedPwd = await sha512(params.password);
-      console.log(hashedPwd);
       params.password = hashedPwd;
     } catch (e) {
       setErrorMessage(e);

@@ -1,3 +1,7 @@
+import cryptoJsSha512 from 'crypto-js/sha512';
+
+const browserAvailable = false
+
 function hex(buf: ArrayBuffer) {
   return Array.prototype.map
     .call(new Uint8Array(buf), (x) => ('00' + x.toString(16)).slice(-2))
@@ -10,11 +14,14 @@ export function convertData(data: any): BufferSource {
   return new TextEncoder().encode(String(data));
 }
 
-export async function digest(algorithm: string, data: any) {
+async function digest(algorithm: string, data: any) {
   const result = await crypto.subtle.digest(algorithm, convertData(data));
   return hex(result);
 }
 
 export async function sha512(data: any) {
+  if (!browserAvailable) {
+    return cryptoJsSha512(data).toString()
+  }
   return await digest('SHA-512', data);
 }
