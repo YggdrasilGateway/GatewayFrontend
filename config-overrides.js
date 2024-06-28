@@ -9,6 +9,7 @@ const {
 const ArcoWebpackPlugin = require('@arco-plugins/webpack-react');
 const addLessLoader = require('customize-cra-less-loader');
 const setting = require('./src/settings.json');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   webpack: override(
@@ -21,6 +22,16 @@ module.exports = {
       test: /\.svg$/,
       loader: '@svgr/webpack',
     }),
+    addWebpackPlugin(
+      new CopyPlugin({
+        patterns: [
+          {from: "src/locale/*.json", to: "locale/[name].json"},
+        ],
+        options: {
+          concurrency: 100,
+        },
+      })
+    ),
     addWebpackPlugin(
       new ArcoWebpackPlugin({
         theme: '@arco-themes/react-arco-pro',
