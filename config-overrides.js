@@ -13,6 +13,13 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   webpack: override(
+    (config) => {
+      if (process.env.DEV_MODE) {
+        config.mode = 'development';
+        config.optimization.minimize = false;
+      }
+      return config;
+    },
     addLessLoader({
       lessLoaderOptions: {
         lessOptions: {},
