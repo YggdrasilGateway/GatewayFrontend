@@ -11,15 +11,12 @@ const addLessLoader = require('customize-cra-less-loader');
 const setting = require('./src/settings.json');
 const CopyPlugin = require("copy-webpack-plugin");
 
+if (process.env.DEV_MODE) {
+  process.env.NODE_ENV = 'development';
+}
+
 module.exports = {
   webpack: override(
-    (config) => {
-      if (process.env.DEV_MODE) {
-        config.mode = 'development';
-        config.optimization.minimize = false;
-      }
-      return config;
-    },
     addLessLoader({
       lessLoaderOptions: {
         lessOptions: {},
@@ -49,6 +46,15 @@ module.exports = {
     ),
     addWebpackAlias({
       '@': path.resolve(__dirname, 'src'),
-    })
+    }),
+    (config) => {
+      if (process.env.DEV_MODE) {
+        console.log(process.env.NODE_ENV);
+        process.env.NODE_ENV = 'development';
+        config.mode = 'development';
+        config.optimization.minimize = false;
+      }
+      return config;
+    },
   ),
 };
