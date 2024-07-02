@@ -9,11 +9,11 @@ import NProgress from 'nprogress';
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';
 import useRoute, {IRoute} from '@/routes';
-import useLocale from './utils/useLocale';
 import getUrlParams from './utils/getUrlParams';
 import lazyload from './utils/lazyload';
 import {GlobalState} from './store';
 import styles from './style/layout.module.less';
+import {useTranslation} from "react-i18next";
 
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
@@ -65,7 +65,7 @@ function PageLayout() {
   const history = useHistory();
   const pathname = history.location.pathname;
   const currentComponent = qs.parseUrl(pathname).url.slice(1);
-  const locale = useLocale();
+  const trans = useTranslation().t;
   const {settings, userLoading, userInfo} = useSelector(
     (state: GlobalState) => state
   );
@@ -94,7 +94,7 @@ function PageLayout() {
 
   const flattenRoutes = useMemo(() => getFlattenRoutes(routes) || [], [routes]);
 
-  function renderRoutes(locale) {
+  function renderRoutes() {
     routeMap.current.clear();
     return function travel(_routes: IRoute[], level, parentNode = []) {
       return _routes.map((route) => {
@@ -102,7 +102,7 @@ function PageLayout() {
         const iconDom = getIconFromKey(route.key);
         const titleDom = (
           <>
-            {iconDom} {locale[route.name] || route.name}
+            {iconDom} {trans(route.name) || route.name}
           </>
         );
 
@@ -216,7 +216,7 @@ function PageLayout() {
                   openKeys={openKeys}
                   onClickSubMenu={(_, openKeys) => setOpenKeys(openKeys)}
                 >
-                  {renderRoutes(locale)(routes, 1)}
+                  {renderRoutes()(routes, 1)}
                 </Menu>
               </div>
               <div className={styles['collapse-btn']} onClick={toggleCollapse}>
@@ -231,7 +231,7 @@ function PageLayout() {
                   <Breadcrumb>
                     {breadcrumb.map((node, index) => (
                       <Breadcrumb.Item key={index}>
-                        {typeof node === 'string' ? locale[node] || node : node}
+                        {typeof node === 'string' ? trans(node) || node : node}
                       </Breadcrumb.Item>
                     ))}
                   </Breadcrumb>
