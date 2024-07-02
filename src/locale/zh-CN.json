@@ -35,6 +35,8 @@
   "personal.settings.security": "安全设置",
   "yggdrasil.service.is-enabled": "是否开启",
   "yggdrasil.service.comment": "备注",
+  "yggdrasil.service.connectionTimeout": "连接超时时间(ms)",
+  "yggdrasil.service.connectionTimeout.incorrect": "需要为自然数",
   "yggdrasil.player.declared-yggdrasil": "来源树",
   "yggdrasil.player.upstream-name": "来源名称",
   "yggdrasil.player.upstream-uuid": "源 UUID",

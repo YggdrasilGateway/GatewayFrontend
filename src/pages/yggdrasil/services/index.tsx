@@ -131,6 +131,22 @@ function ServiceEditor({data, reloadServices}) {
             <Switch/>
           </Form.Item>
           <Form.Item
+            label={t('yggdrasil.service.connectionTimeout')}
+            required
+            field="connectionTimeout"
+            rules={[{required: true}, {
+              validator: (value, callback) => {
+                if (value < 0 || String(value).indexOf('.') != -1) {
+                  callback(t('yggdrasil.service.connectionTimeout.incorrect'))
+                } else {
+                  callback()
+                }
+              }
+            }]}
+          >
+            <Input type='number'/>
+          </Form.Item>
+          <Form.Item
             label={t('yggdrasil.service.comment')}
             field='comment'
           >
@@ -164,6 +180,10 @@ function Services() {
       render(a) {
         return a ? <IconCheck/> : <IconClose/>
       },
+    },
+    {
+      title: t('yggdrasil.service.connectionTimeout'),
+      dataIndex: 'connectionTimeout'
     },
     {
       title: t('yggdrasil.service.comment'),
@@ -203,7 +223,7 @@ function Services() {
         {t('menu.yggdrasil.services')}
       </Typography.Title>
       <Space direction='vertical' style={{width: '100%'}}>
-        <ServiceEditor data={{active: true}} reloadServices={fetchServices}/>
+        <ServiceEditor data={{active: true, connectionTimeout: 0}} reloadServices={fetchServices}/>
         <Table ref={table} columns={columns} data={services} loading={loading}/>
       </Space>
     </Card>
