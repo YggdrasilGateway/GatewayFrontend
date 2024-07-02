@@ -33,6 +33,10 @@ export const routes: IRoute[] = [
     ],
   },
   {
+    name: 'menu.messages-edit',
+    key: 'messages-edit',
+  },
+  {
     name: 'menu.yggdrasil',
     key: 'yggdrasil',
     children: [

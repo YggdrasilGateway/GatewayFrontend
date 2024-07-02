@@ -2,7 +2,7 @@ import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {Redirect, Route, Switch, useHistory} from 'react-router-dom';
 import {Breadcrumb, Layout, Menu, Spin} from '@arco-design/web-react';
 import cs from 'classnames';
-import {IconCloud, IconDashboard, IconMenuFold, IconMenuUnfold, IconUser,} from '@arco-design/web-react/icon';
+import {IconCloud, IconDashboard, IconEdit, IconMenuFold, IconMenuUnfold, IconUser,} from '@arco-design/web-react/icon';
 import {useSelector} from 'react-redux';
 import qs from 'query-string';
 import NProgress from 'nprogress';
@@ -29,6 +29,8 @@ function getIconFromKey(key) {
     return <IconCloud className={styles.icon}/>;
   case 'personal':
     return <IconUser className={styles.icon}/>;
+  case'messages-edit':
+    return <IconEdit className={styles.icon}/>
   default:
     return <div className={styles['icon-empty']}/>;
   }
