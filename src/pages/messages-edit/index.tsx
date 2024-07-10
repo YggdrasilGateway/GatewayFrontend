@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, Card, Form, Input, Message, Modal, Table, TableColumnProps, Typography} from '@arco-design/web-react';
 import axios from "axios";
 import {useTranslation} from "react-i18next";
+import {actionConfirm} from "@/utils/actionConfirm";
 
 function EntryEditor({record, refetch}) {
   const {t} = useTranslation()
@@ -14,6 +15,9 @@ function EntryEditor({record, refetch}) {
   async function doReset() {
     setProcessing(true);
     try {
+      if (!await actionConfirm({title: t('message-edit.reset-confirm')})) {
+        return
+      }
       await axios.post('/api/messages/update', {key: record.key})
       Message.info(t('message-edit.resetted'))
       setVisible(false)
