@@ -13,7 +13,7 @@ function Footer(props: FooterProps = {}) {
         Yggdrasil Gateway
       </div>
       <div className={styles['footer-right']}>
-        Version: {BACKEND_VERSION}^{GIT_COMMIT.substring(0, 6)}
+        Version: {BACKEND_VERSION}^{GIT_COMMIT.substring(0, 8)}
       </div>
     </Layout.Footer>
   );
