@@ -10,6 +10,12 @@ const ArcoWebpackPlugin = require('@arco-plugins/webpack-react');
 const addLessLoader = require('customize-cra-less-loader');
 const setting = require('./src/settings.json');
 const CopyPlugin = require("copy-webpack-plugin");
+const webpack = require('webpack');
+// get git info from command line
+let commitHash = require('child_process')
+  .execSync('git rev-parse HEAD')
+  .toString()
+  .trim();
 
 if (process.env.DEV_MODE) {
   process.env.NODE_ENV = 'development';
@@ -47,9 +53,13 @@ module.exports = {
     addWebpackAlias({
       '@': path.resolve(__dirname, 'src'),
     }),
+    addWebpackPlugin(
+      new webpack.DefinePlugin({
+        '__GIT_COMMIT': JSON.stringify(commitHash)
+      })
+    ),
     (config) => {
       if (process.env.DEV_MODE) {
-        console.log(process.env.NODE_ENV);
         process.env.NODE_ENV = 'development';
         config.mode = 'development';
         config.optimization.minimize = false;

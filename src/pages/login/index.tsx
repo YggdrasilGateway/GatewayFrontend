@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import Footer from '@/components/Footer';
+import React, {useEffect} from 'react';
 import Logo from '@/assets/logo.svg';
 import LoginForm from './form';
 import LoginBanner from './banner';
@@ -13,20 +12,17 @@ function Login() {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
-        <Logo />
+        <Logo/>
         <div className={styles['logo-text']}>Yggdrasil Gateway</div>
       </div>
       <div className={styles.banner}>
         <div className={styles['banner-inner']}>
-          <LoginBanner />
+          <LoginBanner/>
         </div>
       </div>
       <div className={styles.content}>
         <div className={styles['content-inner']}>
-          <LoginForm />
-        </div>
-        <div className={styles.footer}>
-          <Footer />
+          <LoginForm/>
         </div>
       </div>
     </div>

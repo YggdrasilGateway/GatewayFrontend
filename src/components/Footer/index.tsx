@@ -1,14 +1,20 @@
 import React from 'react';
-import { Layout } from '@arco-design/web-react';
-import { FooterProps } from '@arco-design/web-react/es/Layout/interface';
+import {FooterProps} from '@arco-design/web-react/es/Layout/interface';
 import cs from 'classnames';
 import styles from './style/index.module.less';
+import {Layout} from "@arco-design/web-react";
+import {BACKEND_VERSION, GIT_COMMIT} from "@/global";
 
 function Footer(props: FooterProps = {}) {
-  const { className, ...restProps } = props;
+  const {className, ...restProps} = props;
   return (
     <Layout.Footer className={cs(styles.footer, className)} {...restProps}>
-      Arco Design Pro
+      <div className={styles['footer-left']}>
+        Yggdrasil Gateway
+      </div>
+      <div className={styles['footer-right']}>
+        Version: {BACKEND_VERSION}^{GIT_COMMIT.substring(0, 6)}
+      </div>
     </Layout.Footer>
   );
 }
