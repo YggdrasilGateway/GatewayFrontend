@@ -16,6 +16,7 @@ import {IconCheck, IconClose} from "@arco-design/web-react/icon";
 import {useTranslation} from "react-i18next";
 import axios from "axios";
 import ManualSync from "@/pages/yggdrasil/players/manualsync";
+import PlayersCSV from "@/pages/yggdrasil/players/csv";
 
 function PlayerEditor({data, reloadServices}) {
   const {t, i18n} = useTranslation();
@@ -181,6 +182,7 @@ function Players() {
       setLoading(false);
     }
   }
+
   async function doSearch() {
     if (!searchTerm) {
       onChangeTable(null)
@@ -253,6 +255,8 @@ function Players() {
 
         <Grid.Row>
           <ManualSync topReloader={onChangeTable}/>
+          <PlayersCSV.Export/>
+          <PlayersCSV.Import refetch={onChangeTable}/>
           <Grid.Col flex='auto'></Grid.Col>
           <Grid.Col flex='500px'>
             <Input addAfter={
