@@ -27,6 +27,7 @@ function Import({refetch}) {
       } else {
         refetch()
       }
+      form.clearFields()
     } catch (e) {
       console.warn(e)
       Notification.warning({content: String(e)})
