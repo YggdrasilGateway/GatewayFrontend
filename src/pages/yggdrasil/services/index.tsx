@@ -131,6 +131,15 @@ function ServiceEditor({data, reloadServices}) {
             <Switch/>
           </Form.Item>
           <Form.Item
+            label={t('yggdrasil.service.is-limited')}
+            required
+            field="limited"
+            rules={[{required: true}]}
+            triggerPropName={'checked'}
+          >
+            <Switch/>
+          </Form.Item>
+          <Form.Item
             label={t('yggdrasil.service.connectionTimeout')}
             required
             field="connectionTimeout"
@@ -177,6 +186,13 @@ function Services() {
     {
       title: t('yggdrasil.service.is-enabled'),
       dataIndex: 'active',
+      render(a) {
+        return a ? <IconCheck/> : <IconClose/>
+      },
+    },
+    {
+      title: t('yggdrasil.service.is-limited'),
+      dataIndex: 'limited',
       render(a) {
         return a ? <IconCheck/> : <IconClose/>
       },

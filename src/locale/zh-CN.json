@@ -35,6 +35,7 @@
   "settings.color.tooltip": "根据主题颜色生成的 10 个梯度色（将配置复制到项目中，主题色才能对亮色 / 暗黑模式同时生效）",
   "personal.settings.security": "安全设置",
   "yggdrasil.service.is-enabled": "是否开启",
+  "yggdrasil.service.is-limited": "限制登入",
   "yggdrasil.service.comment": "备注",
   "yggdrasil.service.connectionTimeout": "连接超时时间(ms)",
   "yggdrasil.service.connectionTimeout.incorrect": "需要为自然数",
